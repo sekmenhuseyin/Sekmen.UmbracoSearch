@@ -1,3 +1,7 @@
+using Examine;
+using Umbraco.Cms.Core;
+using UmbracoExamine.PDF;
+
 namespace Sekmen.UmbracoSearch
 {
     public class Startup
@@ -34,6 +38,11 @@ namespace Sekmen.UmbracoSearch
                 .AddWebsite()
                 .AddComposers()
                 .Build();
+
+            //Add Examine Multi Searcher
+            services.AddExamineLuceneMultiSearcher("MultiSearcher", new[] {
+                Constants.UmbracoIndexes.ExternalIndexName, PdfIndexConstants.PdfIndexName
+            });
         }
 
         /// <summary>
