@@ -10,7 +10,6 @@ namespace Sekmen.UmbracoSearch.Services;
 
 public interface ISearchService
 {
-    //IEnumerable<ISearchResult> GetSearchResults(string searchTerm, string contentType, out long totalItemCount);
     IEnumerable<SearchResultItem> GetContentSearchResults(string searchTerm, string contentType, out long totalItemCount);
 }
 
@@ -56,11 +55,26 @@ public class SearchService : ISearchService
                     Score = item.Score
                 });
             }
+
+            //we got no content and no media, so we assume the item is a To-Do
+            if (page == null && pageMedia == null)
+            {
+                items.Add(new SearchResultItem
+                {
+                    ToDo = new ToDoModel
+                    {
+                        Title = item.GetValues("title").FirstOrDefault() ?? "",
+                        Id = int.Parse(item.GetValues("id").FirstOrDefault() ?? "")
+                    },
+                    Score = item.Score
+                });
+            }
+
         }
         return items;
     }
 
-    public IEnumerable<ISearchResult> GetSearchResults(string searchTerm, string contentType, out long totalItemCount)
+    private IEnumerable<ISearchResult> GetSearchResults(string searchTerm, string contentType, out long totalItemCount)
     {
         totalItemCount = 0;
         searchTerm = searchTerm.MakeSearchQuerySafe();
@@ -81,7 +95,8 @@ public class SearchService : ISearchService
         var fieldToSearchInvariant = "contents";
         var hideFromNavigation = "umbracoNaviHide";
         var pdfTextContent = "fileTextContent";
-        var fieldsToSearch = new[] { fieldToSearchLang, fieldToSearchInvariant, pdfTextContent };
+        var todoTitle = "title";
+        var fieldsToSearch = new[] { fieldToSearchLang, fieldToSearchInvariant, pdfTextContent, todoTitle };
 
         //write query
         IBooleanOperation? examineQuery;

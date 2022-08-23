@@ -1,4 +1,5 @@
 using Examine;
+using Sekmen.UmbracoSearch.CustomIndex;
 using Umbraco.Cms.Core;
 using UmbracoExamine.PDF;
 
@@ -41,7 +42,7 @@ namespace Sekmen.UmbracoSearch
 
             //Add Examine Multi Searcher
             services.AddExamineLuceneMultiSearcher("MultiSearcher", new[] {
-                Constants.UmbracoIndexes.ExternalIndexName, PdfIndexConstants.PdfIndexName
+                Constants.UmbracoIndexes.ExternalIndexName, PdfIndexConstants.PdfIndexName, CustomToDoIndex.StaticName
             });
         }
 
