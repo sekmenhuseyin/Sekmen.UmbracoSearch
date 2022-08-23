@@ -1,0 +1,36 @@
+﻿@using TheUmbracoSite.Controllers
+@model TheUmbracoSite.Models.BrokenFormModel
+
+
+<div class="section-content">
+            <!-- Section Title -->
+            <div class="title-wrap">
+                <h2 class="section-title">Test Form</h2>
+                <p class="section-sub-title">This form might be a bit wonky. It is on purpose.</p>
+            </div>
+            <!-- End of Section Title -->
+            <div class="row">
+                <!-- Contact Form Holder -->
+                <div class="col-md-8 offset-md-2 contact-form-holder mt-4 aos-init aos-animate" data-aos="fade-up">
+                    @using (Html.BeginUmbracoForm<BrokenController>("Submit"))
+{
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Totally optional name">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                @Html.TextBoxFor(model => model.ANumber, new{@class="form-control"})
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <textarea class="form-control" id="message" name="message" rows="6" placeholder="Your Message - totally optional"></textarea>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <br/>
+                                <button class="btn btn-primary btn-shadow btn-lg" type="submit" name="submit" value="Send">Send</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- End of Contact Form Holder -->
+            </div>
+        </div>

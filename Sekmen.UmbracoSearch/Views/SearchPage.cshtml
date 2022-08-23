@@ -1,0 +1,30 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Sekmen.UmbracoSearch.Models.SearchModel>
+@{
+    Layout = "BasicNav.cshtml";
+}
+<section id="single-content" class="bg-white">
+    <div class="container">
+        <div class="section-content blog-content">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 mt-4">
+                    <article>
+                        <p>Your search for <strong>@Model.Query</strong> returned a number of <strong> @Model.TotalResults</strong> result(s):</p>
+                        @if (Model.SearchResults != null && Model.SearchResults.Any())
+                        {
+                            foreach (var item in Model.SearchResults)
+                            {
+                                <ul>
+                                    <li>
+                                        <a href="@item.PublishedItem.Url()">@item.PublishedItem.Name</a>
+                                        <p>Score: @item.Score</p>
+                                    </li>
+                                </ul>
+                            }
+                        }
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

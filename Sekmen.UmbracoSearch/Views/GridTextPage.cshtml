@@ -1,0 +1,17 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<GridTextPage>
+@{
+    Layout = "BasicNav.cshtml";
+}
+
+<section id="single-content" class="bg-white">
+    <div class="container">
+        <div class="section-content blog-content">
+            <div class="row">
+                <div class="col-md-12 spacedgrid">
+                    @Html.GetGridHtml(Model, "bodyText")
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

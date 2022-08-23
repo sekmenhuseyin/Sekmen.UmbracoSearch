@@ -1,0 +1,11 @@
+{
+    "propertyEditors": [
+        {
+          "name": "GitHub Username",
+          "alias": "my.GitHubUsername",
+          "editor": {
+              "view": "~/App_Plugins/githubusername/editor.html"
+          }
+        }
+    ]
+}
