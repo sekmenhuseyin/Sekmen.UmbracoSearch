@@ -81,20 +81,17 @@ namespace Sekmen.UmbracoSearch.Services
                 examineQuery = criteria.GroupedOr(fieldsToSearch, searchTerm.MultipleCharacterWildcard());
             }
             examineQuery.Not().Field(hideFromNavigation, 1.ToString());
-
+            examineQuery.OrderByDescending(new SortableField("publishingDate", SortType.Long));
 
             //execute query
+            Debug.WriteLine(criteria.ToString());
             var results = examineQuery.Execute();
             totalItemCount = results.TotalItemCount;
 
             //return results
-            if (!results.Any())
-                return Enumerable.Empty<ISearchResult>();
-
-            Debug.WriteLine(criteria.ToString());
-            return results;
-
-
+            return results.Any()
+                ? results
+                : Enumerable.Empty<ISearchResult>();
         }
     }
 }

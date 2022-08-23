@@ -1,4 +1,5 @@
 ﻿using Sekmen.UmbracoSearch.Components;
+using Sekmen.UmbracoSearch.Extensions;
 using Sekmen.UmbracoSearch.Services;
 using Umbraco.Cms.Core.Composing;
 
@@ -10,6 +11,7 @@ namespace Sekmen.UmbracoSearch.Composers
         {
             builder.Services.AddSingleton<ISearchService, SearchService>();
             builder.Components().Append<ExamineComponents>();
+            builder.Services.ConfigureOptions<ConfigureCustomFieldOptions>();
         }
     }
 }

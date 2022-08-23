@@ -16,7 +16,17 @@
                                 <ul>
                                     <li>
                                         <a href="@item.PublishedItem.Url()">@item.PublishedItem.Name</a>
-                                        <p>Score: @item.Score</p>
+                                        @{
+                                            var pDate = item.PublishedItem.Value<DateTime>("publishingDate");
+                                            if (pDate == DateTime.MinValue)
+                                            {
+                                                pDate = item.PublishedItem.CreateDate;
+                                            }
+                                            if (item.PublishedItem.GetType().ToString() == "Umbraco.Cms.Web.Common.PublishedModels.Blog")
+                                            {
+                                                <p>@pDate.ToString("dd MMMM yyyy")</p>
+                                            }
+                                        }
                                     </li>
                                 </ul>
                             }
