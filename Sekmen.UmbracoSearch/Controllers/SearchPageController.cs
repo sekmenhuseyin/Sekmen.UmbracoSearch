@@ -23,15 +23,17 @@ namespace Sekmen.UmbracoSearch.Controllers
             _serviceContext = serviceContext;
         }
 
-        public IActionResult SearchPage(string query)
+        public IActionResult SearchPage(string query, string docTypeToSearch)
         {
             var searchResults = Enumerable.Empty<SearchResultItem>();
             long totalResultCount = 0;
+            if (string.IsNullOrEmpty(docTypeToSearch))
+                docTypeToSearch = "All";
 
             //query might be null if we navigate across different language versions of the page
             if (!string.IsNullOrEmpty(query))
             {
-                searchResults = _searchService.GetContentSearchResults(query, out var totalItemCount);
+                searchResults = _searchService.GetContentSearchResults(query, docTypeToSearch, out var totalItemCount);
                 totalResultCount = totalItemCount;
 
             }
@@ -40,6 +42,7 @@ namespace Sekmen.UmbracoSearch.Controllers
                 new PublishedValueFallback(_serviceContext, _variationContextAccessor))
             {
                 Query = query,
+                DocTypeToSearch = docTypeToSearch,
                 SearchResults = searchResults,
                 TotalResults = totalResultCount
             };

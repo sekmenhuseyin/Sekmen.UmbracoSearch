@@ -10,6 +10,12 @@ using Umbraco.Cms.Infrastructure.Examine;
 
 namespace Sekmen.UmbracoSearch.Services
 {
+    public interface ISearchService
+    {
+        IEnumerable<ISearchResult> GetSearchResults(string searchTerm, string contentType, out long totalItemCount);
+        IEnumerable<SearchResultItem> GetContentSearchResults(string searchTerm, string contentType, out long totalItemCount);
+    }
+
     public class SearchService : ISearchService
     {
         private readonly IExamineManager _examineManager;
@@ -21,9 +27,9 @@ namespace Sekmen.UmbracoSearch.Services
             _contextAccessor = contextAccessor;
         }
 
-        public IEnumerable<SearchResultItem> GetContentSearchResults(string searchTerm, out long totalItemCount)
+        public IEnumerable<SearchResultItem> GetContentSearchResults(string searchTerm, string contentType, out long totalItemCount)
         {
-            var pageOfResults = GetSearchResults(searchTerm, out totalItemCount);
+            var pageOfResults = GetSearchResults(searchTerm, contentType, out totalItemCount);
             var items = new List<SearchResultItem>();
             if (pageOfResults == null || !pageOfResults.Any())
                 return items;
@@ -46,7 +52,7 @@ namespace Sekmen.UmbracoSearch.Services
             return items;
         }
 
-        public IEnumerable<ISearchResult> GetSearchResults(string searchTerm, out long totalItemCount)
+        public IEnumerable<ISearchResult> GetSearchResults(string searchTerm, string contentType, out long totalItemCount)
         {
             totalItemCount = 0;
             searchTerm = searchTerm.MakeSearchQuerySafe();
@@ -81,6 +87,10 @@ namespace Sekmen.UmbracoSearch.Services
                 examineQuery = criteria.GroupedOr(fieldsToSearch, searchTerm.MultipleCharacterWildcard());
             }
             examineQuery.Not().Field(hideFromNavigation, 1.ToString());
+            if (contentType != "All")
+            {
+                examineQuery.And().Field("__NodeTypeAlias", contentType);
+            }
             examineQuery.OrderByDescending(new SortableField("publishingDate", SortType.Long));
 
             //execute query

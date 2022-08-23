@@ -1,6 +1,9 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+﻿@inject IContentTypeService ContentTypeService
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-    IPublishedContent searchPage = Model.Root().FirstChild<SearchPage>();
+    var searchPage = Model.Root().FirstChild<SearchPage>();
+    var docTypes = ContentTypeService.GetAllContentTypeAliases();
+
 }
 @if (searchPage != null)
 {
@@ -14,6 +17,15 @@
                         <button style="border-radius:initial" class="btn btn-primary lnr lnr-magnifier"></button>
                     </div>
                 </div>
+                Search on:
+                <select style="width:100%" id="doctypeToSearch" name="doctypeToSearch">
+                    <option>All</option>
+                    @foreach (var docType in docTypes)
+                    {
+                        <option>@docType</option>
+                    }
+                </select>
+
             </form>
         </div>
     </div>

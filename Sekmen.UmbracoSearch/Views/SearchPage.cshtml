@@ -1,4 +1,4 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Sekmen.UmbracoSearch.Models.SearchModel>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<SearchModel>
 @{
     Layout = "BasicNav.cshtml";
 }
@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2 mt-4">
                     <article>
-                        <p>Your search for <strong>@Model.Query</strong> returned a number of <strong> @Model.TotalResults</strong> result(s):</p>
+                        <p>Your search for <strong>@Model.Query</strong> returned a number of <strong> @Model.TotalResults</strong> result(s) on item types: <strong>@Model.DocTypeToSearch</strong></p>
                         @if (Model.SearchResults != null && Model.SearchResults.Any())
                         {
                             foreach (var item in Model.SearchResults)

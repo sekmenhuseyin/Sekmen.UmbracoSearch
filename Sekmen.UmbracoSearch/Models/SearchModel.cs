@@ -12,5 +12,6 @@ namespace Sekmen.UmbracoSearch.Models
         public string Query { get; set; }
         public long TotalResults { get; set; }
         public IEnumerable<SearchResultItem> SearchResults { get; set; }
+        public string DocTypeToSearch { get; set; }
     }
 }
