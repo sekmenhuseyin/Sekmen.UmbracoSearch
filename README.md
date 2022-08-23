@@ -6,22 +6,24 @@ The end goal of this approach is to enrich the view model passed to the template
 
 ## Requirements
 
-- Visual Studio
+### Visual Studio
 
 You will need Visual Studio to participate. I recommend that you use VS 2022, which is the latest and fastest option. VS 2019 is also okay to go with.
 
-- .NET Core
+### .NET Core
 
 Make sure you install .NET Core (.NET 6 ) from https://dotnet.microsoft.com/en-us/download .
 
-- Project setup
+### Project setup
 
 1. Follow the instructions here to create a new blank Umbraco project locally: https://our.umbraco.com/documentation/Fundamentals/Setup/Install/install-umbraco-with-templates
 2. Run the project and do the initial setup 
 3. Install UmbTrainingSite.Package from nuGet. The package contains the necessary files for most of our courses
 4. Run the site - on the frontend, you should see a website with sample content.
 
-- Exercise Files
-Web: https://training.umbraco.com/resources
-Password: TakeMeToSearch2556
-PDF: /Examine___TakeMeToSearch2556.pdf
+#### Exercise Files
+
+- Web: https://training.umbraco.com/resources
+- Password: TakeMeToSearch2556
+- PDF: [Examine.pdf](/Examine___TakeMeToSearch2556.pdf)
+
