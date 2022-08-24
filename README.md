@@ -24,4 +24,4 @@ Make sure you install .NET Core (.NET 6 ) from https://dotnet.microsoft.com/en-u
 - Exercise Files
 Web: https://training.umbraco.com/resources
 Password: TakeMeToSearch2556
-PDF: /Examine___TakeMeToSearch2556.pdf
+PDF: /Docs/Examine___TakeMeToSearch2556.pdf
